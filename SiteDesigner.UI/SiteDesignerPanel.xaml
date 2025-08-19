@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="SiteDesigner.UI.SiteDesignerPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" 
+             d:DesignHeight="480" d:DesignWidth="360">
+    <Grid Margin="8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel>
+            <TextBlock Text="Site Designer" FontSize="18" FontWeight="Bold"/>
+            <TextBlock Text="Parameters" Margin="0,8,0,0" FontWeight="SemiBold"/>
+        </StackPanel>
+
+        <!-- Make the main parameters area scrollable -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <Grid Margin="0,8,0,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto" MinWidth="100"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,6" Text="Front Setback (ft)"/>
+                <TextBox   Grid.Row="0" Grid.Column="1" Margin="6" Width="100" Text="{Binding FrontSetback, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,6" Text="Side Setback (ft)"/>
+                <TextBox   Grid.Row="1" Grid.Column="1" Margin="6" Width="100" Text="{Binding SideSetback, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,6" Text="Rear Setback (ft)"/>
+                <TextBox   Grid.Row="2" Grid.Column="1" Margin="6" Width="100" Text="{Binding RearSetback, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <TextBlock Grid.Row="3" Grid.Column="0" Margin="0,6" Text="Stall Width (ft)"/>
+                <TextBox   Grid.Row="3" Grid.Column="1" Margin="6" Width="100" Text="{Binding StallWidth, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <TextBlock Grid.Row="4" Grid.Column="0" Margin="0,6" Text="Stall Depth (ft)"/>
+                <TextBox   Grid.Row="4" Grid.Column="1" Margin="6" Width="100" Text="{Binding StallDepth, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <TextBlock Grid.Row="5" Grid.Column="0" Margin="0,6" Text="Aisle Width (ft)"/>
+                <TextBox   Grid.Row="5" Grid.Column="1" Margin="6" Width="100" Text="{Binding AisleWidth, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <TextBlock Grid.Row="6" Grid.Column="0" Margin="0,6" Text="Target Stalls"/>
+                <TextBox   Grid.Row="6" Grid.Column="1" Margin="6" Width="100" Text="{Binding TargetStalls, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+        </ScrollViewer>
+
+        <!-- Use WrapPanel so buttons wrap instead of clipping when narrow -->
+        <WrapPanel Grid.Row="2" HorizontalAlignment="Right">
+            <Button Content="Pick Boundary" Width="120" Margin="0,0,8,0" Command="{Binding PickBoundaryCommand}"/>
+            <Button Content="Draw Setback" Width="120" Margin="0,0,8,0" Command="{Binding DrawSetbackCommand}"/>
+            <Button Content="Apply" Width="100" Margin="0,0,8,0" Command="{Binding ApplyCommand}"/>
+            <Button Content="Place Test Layout" Width="140" Command="{Binding PlaceTestLayoutCommand}"/>
+        </WrapPanel>
+    </Grid>
+</UserControl>

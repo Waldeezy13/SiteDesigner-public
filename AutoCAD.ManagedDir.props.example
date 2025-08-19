@@ -1,0 +1,12 @@
+<!-- Example local AutoCAD configuration file -->
+<!-- Copy this file to AutoCAD.ManagedDir.props in the solution root to override AutoCAD paths -->
+<!-- This file is in .gitignore so it won't be committed to the repository -->
+
+<Project>
+  <PropertyGroup>
+    <!-- Uncomment and modify the line below to point to your AutoCAD installation -->
+    <!-- <AutoCADManagedDir>C:\Program Files\Autodesk\AutoCAD 2025\</AutoCADManagedDir> -->
+    <!-- <AutoCADManagedDir>C:\Program Files\Autodesk\AutoCAD 2024\</AutoCADManagedDir> -->
+    <!-- <AutoCADManagedDir>D:\Autodesk\AutoCAD 2026\</AutoCADManagedDir> -->
+  </PropertyGroup>
+</Project>

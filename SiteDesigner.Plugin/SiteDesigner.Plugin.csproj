@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<UseWPF>true</UseWPF>
+		<UseWindowsForms>true</UseWindowsForms>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<!-- Force 64-bit even if Solution Platform says Any CPU -->
+		<Platforms>x64</Platforms>
+		<PlatformTarget>x64</PlatformTarget>
+		
+		<!-- Portable AutoCAD path resolution with fallbacks -->
+		<!-- 1. Use MSBuild property if already set (command line or Directory.Build.props) -->
+		<!-- 2. Use ACAD_MANAGED environment variable if set -->
+		<!-- 3. Fall back to default installation path -->
+		<AutoCADManagedDir Condition="'$(AutoCADManagedDir)'=='' and '$(ACAD_MANAGED)'!=''">$(ACAD_MANAGED)\</AutoCADManagedDir>
+		<AutoCADManagedDir Condition="'$(AutoCADManagedDir)'==''">C:\Program Files\Autodesk\AutoCAD 2026\</AutoCADManagedDir>
+		
+		<!-- Build to temp directory to avoid file locking -->
+		<OutputPath>$(TEMP)\SiteDesigner\Build\</OutputPath>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.WindowsDesktop.App.WPF" />
+		<FrameworkReference Include="Microsoft.WindowsDesktop.App.WindowsForms" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\SiteDesigner.Core\SiteDesigner.Core.csproj" />
+		<ProjectReference Include="..\SiteDesigner.UI\SiteDesigner.UI.csproj" />
+	</ItemGroup>
+
+	<!-- AutoCAD managed references with portable paths -->
+	<ItemGroup>
+		<Reference Include="acdbmgd">
+			<HintPath>$(AutoCADManagedDir)acdbmgd.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="acmgd">
+			<HintPath>$(AutoCADManagedDir)acmgd.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="accoremgd">
+			<HintPath>$(AutoCADManagedDir)accoremgd.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+	</ItemGroup>
+
+	<Target Name="ShowOutputPath" AfterTargets="Build">
+		<Message Text="Plugin built to: $(OutputPath)SiteDesigner.Plugin.dll" Importance="high" />
+	</Target>
+
+	<Target Name="ShowAutoCADPath" BeforeTargets="Build">
+		<Message Text="Using AutoCAD managed DLLs from: $(AutoCADManagedDir)" Importance="high" />
+	</Target>
+</Project>
