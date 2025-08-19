@@ -1,4 +1,4 @@
-# Visual Studio
+# Visual Studio / MSBuild
 .vs/
 *.user
 *.suo
@@ -22,5 +22,12 @@ project.lock.json
 *.DS_Store
 Thumbs.db
 
-# Local overrides we'll add below
+# Local machine override
 AutoCAD.ManagedDir.props
+
+# Crash/telemetry
+*.dmp
+*.mdmp
+*.pb
+CER/
+_minidump_extracted/
