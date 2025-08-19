@@ -20,6 +20,10 @@
 		<OutputPath>$(TEMP)\SiteDesigner\Build\</OutputPath>
 	</PropertyGroup>
 
+	<!-- Import local AutoCAD path overrides if present (per-machine configuration) -->
+	<Import Project="$(SolutionDir)AutoCAD.ManagedDir.props" 
+	        Condition="Exists('$(SolutionDir)AutoCAD.ManagedDir.props')" />
+
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.WindowsDesktop.App.WPF" />
 		<FrameworkReference Include="Microsoft.WindowsDesktop.App.WindowsForms" />
@@ -52,5 +56,6 @@
 
 	<Target Name="ShowAutoCADPath" BeforeTargets="Build">
 		<Message Text="Using AutoCAD managed DLLs from: $(AutoCADManagedDir)" Importance="high" />
+		<Message Text="Local props file: $(SolutionDir)AutoCAD.ManagedDir.props $(if(Exists('$(SolutionDir)AutoCAD.ManagedDir.props'),'(Found)','(Not found - using defaults)'))" Importance="high" />
 	</Target>
 </Project>
