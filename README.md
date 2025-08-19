@@ -115,6 +115,9 @@ The project includes GitHub Actions workflow (`.github/workflows/mirror.yml`) th
 3. **Public Sharing**: Clean public repository without sensitive data or machine-specific configs
 4. **Community Engagement**: Public repository enables community contributions and usage
 
+## Mirror check
+Public mirror smoke test — commit #1
+
 ## License
 
 [Choose appropriate license - MIT, Apache 2.0, etc.]
